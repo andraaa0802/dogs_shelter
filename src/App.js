@@ -1,11 +1,11 @@
 import React from 'react';
-import Home from './components/Home';
-import About from './components/About';
-import Adopt from './components/Adopt';
-import Adoptions from './components/Adoptions';
-import Contact from './components/Contact';
-import FAQ from './components/FAQ';
-import Login from './components/Login';
+import Home from './pages/Home';
+import About from './pages/About';
+import Adopt from './pages/Adopt';
+import Adoptions from './pages/Adoptions';
+import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
+import Login from './pages/Login';
 import { Route, Routes} from 'react-router-dom';
 import './styles.css';
 

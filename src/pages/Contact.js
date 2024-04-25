@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import ContactUs from './contact_form/contact';
-import Breadcrumbs from './Breadcrumbs';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ContactUs from '../components/contact_form/contact';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'; // Importing react-icons
 
 function Contact() {

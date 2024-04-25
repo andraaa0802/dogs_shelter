@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import Accordion from './accordion/accordion'
-import Breadcrumbs from './Breadcrumbs';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Accordion from '../components/accordion/accordion'
+import Breadcrumbs from '../components/Breadcrumbs';
 
 function FAQ() {
   return (
