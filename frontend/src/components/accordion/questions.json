@@ -1,0 +1,37 @@
+[
+    {
+        "id":1,
+        "question":"Pot să vizitez câinii disponibili pentru adopție înainte de a lua o decizie?",
+        "answer":"Da, vă încurajăm să vizitați adăpostul și să întâlniți câinii disponibili pentru adopție pentru a vedea care se potrivește cel mai bine cu stilul dumneavoastră de viață. "
+    },
+    {
+        "id":2,
+        "question":"Exitsă cerințe speciale pentru adopția unui câine?",
+        "answer":"Nu avem cerințe speciale, dar vă vom informa și sfătui în legătură cu nevoile specifice ale fiecărui câine și ne vom asigura că sunteți pregătit să îndepliniți nevoile sale."
+    },
+    {
+        "id":3,
+        "question":"Am deja un câine. Cum pot să mă asigur că blănoșii mei se vor înțelege?",
+        "answer":"Vă vom oferi sfaturi și informații despre câinii disponibili pentru adopție și vom încerca să găsim un câine care se potrivește cel mai bine cu câinele dumneavoastră existent. De asemenea, vă vom oferi sfaturi despre cum să îi prezentați și să îi ajutați să se înțeleagă."
+    },
+    {
+        "id":4,
+        "question":"Odată ce am adoptat un câine, ce îngrijiri medicale necesită?",
+        "answer":"Toți câinii adăpostului nostru sunt vaccinați, sterilizați și deparazitați, deci nu necesită îngrijiri medicale imediate. Totuși, dacă este cazul, vă vom oferi informații despre istoricul medical al câinelui și despre posibilele tratamentele de care are nevoie. De asemenea, vă vom oferi sfaturi despre cum să îngrijiți câinele și cum să îi mențineți sănătatea."
+    },
+    {
+        "id":5,
+        "question":"Pot să ma implic în activități de voluntariat la adăpost?",
+        "answer":"Cu siguranță! Am fi foarte recunoscători dacă ne-ați ajuta să menținem adăpostul curat și organizat, să îngrijim câinii și să îi plimbăm. De asemenea, puteți ajuta la organizarea de evenimente de adopție și la promovarea adopției responsabile. Dacă sunteți interesat, vă rugăm să ne contactați pentru mai multe informații."
+    },
+    {
+        "id":6,
+        "question":"Ce costuri implică adopția unui câine?",
+        "answer":"Adopția unui câine din adăpostul nostru este 100% gratuită, însă va trebui să acoperiți costurile de hrănire, îngrijire și alte necesități pe parcursul întregii vieți a blănosului."
+    },
+    {
+        "id":7,
+        "question":"Cum pot să adopt un câine din adăpost?",
+        "answer":"Pentru a adopta un câine din adăpost, puteți completa online formularul de adopție, iar noi vă vom contacta pentru a stabili o întâlnire sau puteți să ne vizitați direct la adăpost și să alegeți un câine care vi se potrivește. Vă vom oferi toate informațiile și sfaturile de care aveți nevoie pentru a face o alegere responsabilă și pentru a îngriji câinele în mod corespunzător."
+    }
+]

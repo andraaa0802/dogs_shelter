@@ -1,0 +1,45 @@
+.contact-container {
+    max-width: 65%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.contact-info {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 1px;
+}
+
+.detail-icon svg {
+    border-radius: 30px;
+    background: #34ce57;
+    padding: 10px;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.detail-content {
+    color: #000;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.detail-content p {
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+.contact-form {
+    margin-top: 20px;
+}
+
+.contact-icon-details {
+    display: flex;
+    align-items: center;
+}

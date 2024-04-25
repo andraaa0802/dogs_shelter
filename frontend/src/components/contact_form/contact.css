@@ -1,0 +1,53 @@
+h1{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.contact-form-container {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 25px;
+  }
+  
+  img {
+    width: 75%;
+    height: 85%;
+    margin-left:auto;
+    margin-top: 25px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 2px solid #34ce57;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: 500;
+  }
+  
+  input[type="submit"] {
+    background-color: #34ce57;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: green;
+  }
+  
