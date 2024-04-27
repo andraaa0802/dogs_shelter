@@ -7,7 +7,7 @@ function About() {
     return (
         <div>
             <Header />
-            <Breadcrumbs path="Despre noi" />
+            <Breadcrumbs previousPage="Acasă" path="Despre noi" />
 
             <section>
                 <div className="container">

@@ -6,7 +6,7 @@
     padding: 1rem 2rem;
     background-color: #edefed54;
     color: #000;
-    box-shadow: 0.5px 0.5px 0.5px #333;
+    box-shadow: 0px 6px 6px #999;
     border-radius: 40px;
     text-align: left;
     cursor: pointer;
@@ -16,7 +16,7 @@
 
 .selected {
     background-color: #34ce57;
-    box-shadow: 0.5px 0.5px 0.5px #333;
+    box-shadow: 0px 6px 6px #999;
 }
 
 .selected h3{
@@ -47,7 +47,7 @@
 
 .answer-box {
     background-color: #edefed54;
-    box-shadow: 0.5px 0.5px 0.5px #333;
+    box-shadow: 0px 6px 6px #999;
     border-radius: 30px;
     padding:2rem;
     display: block; 

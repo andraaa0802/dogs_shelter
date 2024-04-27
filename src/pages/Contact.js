@@ -9,7 +9,7 @@ function Contact() {
   return (
     <div>
       <Header />
-      <Breadcrumbs path="Contact" />
+      <Breadcrumbs previousPage="Acasă" path="Contact" />
 
       <section>
         <div className="contact-container">

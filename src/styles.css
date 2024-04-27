@@ -1,3 +1,4 @@
+/* Contact Section */
 .contact-container {
     max-width: 65%;
     margin: 0 auto;
@@ -42,4 +43,73 @@
 .contact-icon-details {
     display: flex;
     align-items: center;
+}
+
+/* Adopt section */
+.cards-container {
+    width: 65%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cards-display{
+    margin: 10px;
+}
+
+/* Dog details section */
+.details-container {
+    max-width: 65%;
+    align-self: center;
+    margin: 0 auto;
+}
+
+.details-image-text{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    margin-bottom: 25px;
+    height: 100%;
+}
+
+.dog-details{
+    font-weight: 700;
+    font-size: large;
+    color: black;
+    
+}
+
+.image-set{
+    width: 90%;
+    height: 90%;
+}
+
+.details-text{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.adopt-btn{
+    text-align: center;
+    width: 50%;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5rem 1rem;
+    background-color: #34ce57;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0.5rem auto;
+    transition: 0.3s;
+    display: block;
+    cursor: pointer;
+}
+.adopt-btn:hover{
+    background-color: green;
+    color: white;
+}
+
+.info{
+    margin-top: 25px;
+    margin-bottom: 0;
+    color:rgb(163, 163, 163);
 }

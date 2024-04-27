@@ -6,6 +6,7 @@ import Adoptions from './pages/Adoptions';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Login from './pages/Login';
+import DogDetails from './pages/DogDetails';
 import { Route, Routes} from 'react-router-dom';
 import './styles.css';
 
@@ -20,6 +21,7 @@ function App() {
          <Route path='/adoptions' element={<Adoptions/>} />
          <Route path='/contact' element={<Contact/>} />
          <Route path='/login' element={<Login/>} />
+        <Route path='/dog/:id' element={<DogDetails/>} />
        </Routes>
     </div>
   );

@@ -9,7 +9,7 @@ function FAQ() {
 
     <div style={{backgroundColor:'#fff'}}>
       <Header />
-      <Breadcrumbs path="FAQ" />
+      <Breadcrumbs previousPage="Acasă" path="FAQ" />
       <div className='container'>
       <Accordion/>
       </div>

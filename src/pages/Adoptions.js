@@ -7,7 +7,7 @@ function Adoptions() {
   return (
     <div>
       <Header />
-      <Breadcrumbs path="Adopții" />
+      <Breadcrumbs previousPage="Acasă" path="Adopții" />
       <Footer />
     </div>
   );
