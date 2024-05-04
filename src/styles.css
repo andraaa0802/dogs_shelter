@@ -57,6 +57,63 @@
     margin: 10px;
 }
 
+.filtering{
+    width: 65%;
+    margin: 10px auto; 
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: last baseline;
+}
+
+.filter-container{
+    width: calc(25% - 10px);
+margin: 10px;}
+
+.filter-text{
+    margin: 20px auto 2px 0;
+    color: #aaaeab;
+}
+.dropdown-selector{
+    border-radius: 30px !important;
+    width: 90% !important;
+}
+
+.reset-btn{
+    width: 20%;
+    height: 38px;
+    border-radius: 30px;
+    border: none;
+    background-color: #34ce57;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.reset-btn:hover{
+    background-color: green;
+    color: white;
+}
+
+.search-container{
+    width: 45%;
+    margin: 10px auto; 
+}
+
+.search-bar{
+    width: 100%;
+    height: 38px;
+    border-radius: 30px;
+    border:rgb(206, 206, 206) 1px solid;
+    padding: 0 10px;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+
+.search-bar:focus{
+    outline: none;
+}
+
 /* Dog details section */
 .details-container {
     max-width: 65%;
@@ -72,9 +129,9 @@
 }
 
 .dog-details{
-    font-weight: 700;
+    font-weight: 600;
     font-size: large;
-    color: black;
+    color: rgb(0, 0, 0);
     
 }
 
@@ -113,3 +170,6 @@
     margin-bottom: 0;
     color:rgb(163, 163, 163);
 }
+
+
+  

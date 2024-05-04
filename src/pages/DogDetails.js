@@ -42,8 +42,8 @@ function DogDetails() {
                     <div className='details-text'>
                         <h1>{dogDetails.name}</h1>
 
-                        <p>Vârstă: <span className='dog-details'>{dogDetails.age} ani</span></p>
                         <p>Gen: <span className='dog-details'>{dogDetails.gender}</span></p>
+                        <p>Vârstă: <span className='dog-details'>{dogDetails.age} ani</span></p>
                         <p>Rasă: <span className='dog-details'>{dogDetails.breed}</span></p>
                         <p>Descriere: <span className='dog-details'>{dogDetails.description}</span></p>
                         <button disabled className='adopt-btn'>Adoptă</button>

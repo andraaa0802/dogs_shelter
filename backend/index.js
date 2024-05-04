@@ -42,10 +42,37 @@ app.get('/dogs/:id', (req, res) => {
 });
 
 app.get('/dogs', (req, res) => {
-    pool.query('SELECT * FROM dogs WHERE status="available"', (err, data) => {
+    let query = 'SELECT * FROM dogs WHERE status="available" ';
+    const gender = req.query.gender;
+    const breed = req.query.breed;
+    const age = req.query.age;
+    const search = req.query.search;
+
+    if (gender) {
+        query += `AND gender="${gender}"`;
+    }
+
+    if (breed) {
+        if (breed==='rasa') {
+            query += `AND breed !="Comună"`;}
+        else if (breed==='comuna') {
+            query += `AND breed ="Comună"`;}
+    }
+
+    if (age==='crescator') {
+        query += `ORDER BY age ASC`;
+    } else if (age==='descrescator') {
+        query += `ORDER BY age DESC`;
+    }
+
+    if (search) {
+        query += `AND (name LIKE '%${search}%' OR breed LIKE '%${search}%' OR description LIKE '%${search}%' OR age LIKE '${search}') `;
+    }
+
+    pool.query(query, (err, data) => {
         if (err) {
             console.error('Error querying database:', err);
-            return res.json(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
         return res.json(data);
     });
