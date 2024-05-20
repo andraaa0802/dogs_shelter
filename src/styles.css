@@ -166,6 +166,12 @@ margin: 10px;}
     color: white;
 }
 
+.adopt-btn:disabled{
+    background-color: #c6c6c6;
+    color: white;
+    cursor: default  ;
+}
+
 .info{
     margin-top: 25px;
     margin-bottom: 0;

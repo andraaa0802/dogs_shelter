@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 function DogDetails() {
     const { id } = useParams();
     const [dogDetails, setDogDetails] = useState(null);
+    const [isLogged, setIsLogged] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:5500/dogs/${id}`)
@@ -25,6 +26,22 @@ function DogDetails() {
             });
     }, [id]);
 
+    useEffect(() => {
+        const handleStorageChange = () => {
+            const loggedIn = localStorage.getItem('isLoggedIn');
+            if (loggedIn) {
+                setIsLogged(true);
+            } else {
+                setIsLogged(false);
+            }
+        };
+        window.addEventListener('storage', handleStorageChange);
+        handleStorageChange();
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, []);
+    
     if (!dogDetails) {
         return <div>Loading...</div>;
     }
@@ -34,7 +51,9 @@ function DogDetails() {
             <Header />
             <Breadcrumbs previousPage="Adoptă" path="Detaliile câinelui" />
             <div className='details-container'>
-                <p className='info'>Pentru a putea completa formularul de adopție trebuie să fiți logat. </p>
+                {!isLogged &&
+                    <p className='info'>Pentru a putea completa formularul de adopție trebuie să fiți logat. </p>
+                }
                 <div className='details-image-text'>
                     <div>
                         <img className='image-set' src={dogDetails.image_url} alt={dogDetails.name} />
@@ -46,7 +65,7 @@ function DogDetails() {
                         <p>Vârstă: <span className='dog-details'>{dogDetails.age} ani</span></p>
                         <p>Rasă: <span className='dog-details'>{dogDetails.breed}</span></p>
                         <p>Descriere: <span className='dog-details'>{dogDetails.description}</span></p>
-                        <button disabled className='adopt-btn'>Adoptă</button>
+                        <button disabled={!isLogged} className='adopt-btn'>Adoptă</button>
                     </div>
                 </div>
             </div>

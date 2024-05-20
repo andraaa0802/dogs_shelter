@@ -1,21 +1,35 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Authenticator from './Authenticator';
-
 
 function Header() {
   const [isAuthenticatorOpen, setIsAuthenticatorOpen] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
 
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('isLoggedIn');
+    const email = localStorage.getItem('email');
+    if (loggedIn && email) {
+      setIsLogged(true);
+    }
+  }, []);
+
   const openAuthenticator = () => setIsAuthenticatorOpen(true);
   const closeAuthenticator = () => setIsAuthenticatorOpen(false);
   
-  const handleLogin = () => {
+  const handleLogin = (email) => {
     setIsLogged(true);
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('email', email);
+    window.dispatchEvent(new Event('storage'));
   }
 
   const handleLogout = () => {
     setIsLogged(false);
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('email');
+    alert("V-ați delogat cu succes!")
+    window.dispatchEvent(new Event('storage'));
   }
 
   return (

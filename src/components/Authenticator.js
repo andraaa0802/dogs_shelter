@@ -4,6 +4,7 @@ import {FaEye, FaEyeSlash} from 'react-icons/fa';
 
 const Authenticator = ({ closeModal, handleLogin }) => {
 
+    axios.defaults.withCredentials = true;
     const [isLogin, setIsLogin] = useState(true);
 
     const [formData, setFormData] = useState({
@@ -60,8 +61,8 @@ const Authenticator = ({ closeModal, handleLogin }) => {
             .then((response) => {
                 console.log(response.data);
                 if (isLogin) {
+                    handleLogin(response.data.email);
                     closeModal();
-                    handleLogin();
                     setTimeout(() => {
                     alert("Bun venit, " + response.data.firstname + "!");
                     }, 100);
@@ -90,8 +91,8 @@ const Authenticator = ({ closeModal, handleLogin }) => {
                     setError("A apărut o eroare. Vă rugăm să încercați din nou.");
                 }
             });
-
     };
+
     
     return (
         <div className="modal">

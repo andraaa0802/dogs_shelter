@@ -2,10 +2,28 @@ import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2';
 import bcrypt from 'bcrypt';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}
+));
+app.use(cookieParser());
+app.use(session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24, 
+        secure: false,
+        sameSite: 'lax',
+        httpOnly: true
+    }
+}));
 
 const pool = mysql.createPool({
     host: 'localhost',
@@ -145,10 +163,23 @@ app.post('/login', (req, res) => {
             if (!result) {
                 return res.status(401).json({ error: 'Incorrect password' });
             }
-            return res.json({firstname: user.firstname});
+
+            req.session.user = {email: user.email, firstname: user.firstname};
+
+            res.json({isLoggedIn: true, firstname: user.firstname});
         }); 
     });
 });
 
+app.post('/logout', (req, res) => {
+    req.session.destroy(err =>{
+        if (err) {
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+    });
+    res.json({isLoggedIn: false});
+    res.clearCookie('connect.sid');
+    res.sendStatus(200);
+});
 
 app.listen(5500, () => console.log('Server started on port 5500'));
