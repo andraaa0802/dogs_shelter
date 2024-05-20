@@ -1,6 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import Authenticator from './Authenticator';
+
+
 function Header() {
+  const [isAuthenticatorOpen, setIsAuthenticatorOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+
+  const openAuthenticator = () => setIsAuthenticatorOpen(true);
+  const closeAuthenticator = () => setIsAuthenticatorOpen(false);
+  
+  const handleLogin = () => {
+    setIsLogged(true);
+  }
+
+  const handleLogout = () => {
+    setIsLogged(false);
+  }
+
   return (
     <>
       <div>
@@ -41,13 +58,19 @@ function Header() {
                 <li className="nav-item"><Link className="nav-link" reloadDocument to="/FAQ">FAQ</Link></li>
                 <li className="nav-item"><Link className="nav-link" reloadDocument to="/adoptions">Adopții</Link></li>
                 <li className="nav-item"><Link className="nav-link" reloadDocument to="/contact">Contact</Link></li>
-                <li className="nav-item"><Link className="nav-link" reloadDocument to="/login">Log In</Link></li>
+                <li className="nav-item">
+                  {isLogged ? (
+                  <Link className="nav-link" onClick={handleLogout} >Log out</Link>
+                  ) : (
+                  <Link className="nav-link" onClick={openAuthenticator} >Log in</Link>
+                  )}
+                </li>
               </ul>
             </div>
           </div>
         </nav>
       </div>
-
+      {isAuthenticatorOpen && <Authenticator closeModal={closeAuthenticator} handleLogin={handleLogin} />}
     </> 
   );
 }

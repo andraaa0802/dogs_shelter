@@ -1,16 +1,17 @@
 import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2';
+import bcrypt from 'bcrypt';
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'password',
-    database: 'dog_shelter',
-    connectionLimit: 10 
+    database: 'dog_shelter'
 });
 
 pool.getConnection((err, connection) => {
@@ -77,5 +78,77 @@ app.get('/dogs', (req, res) => {
         return res.json(data);
     });
 });
+
+app.post('/signup', (req, res) => {
+    const { email, password, confirmPassword, firstname, lastname, phone } = req.body;
+
+    const sqlCheckEmail = 'SELECT * FROM users WHERE email = ?';
+
+    pool.query(sqlCheckEmail, email, (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        if (data.length > 0) {
+            return res.status(409).json({ error: 'Email already exists' });
+        }
+
+        const validatePhone=/^0[0-9]{9}$/;
+        if (!validatePhone.test(phone)) {
+            return res.status(422).json({ error: 'Phone not ok' });
+        }
+   
+        const validatePassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if (!validatePassword.test(password)) {
+            return res.status(406).json({ error: 'Password not ok' });
+        }
+    
+        if(password !== confirmPassword) {
+            return res.status(400).json({ error: 'Passwords do not match' });
+        }
+    
+        const saltRounds = 10;
+        bcrypt.hash(password, saltRounds, (err, hash) => {
+            if (err) {
+               console.log(err);
+            }
+            const sql= 'INSERT INTO users (`email`, `password`, `firstname`, `lastname`, `phone`) VALUES (?, ?, ?, ?, ?)';
+            const insertValues = [email, hash, firstname, lastname, phone];
+
+            pool.query(sql, insertValues, (err, data) => {
+                if (err) {
+                    return res.json(err);    
+                }
+                return res.json(data);
+            });
+        });
+    });
+});
+
+app.post('/login', (req, res) => {
+    const sqlCheckEmail = 'SELECT * FROM users WHERE email = ?';
+    const {email, password} = req.body;
+    
+    pool.query(sqlCheckEmail, email, (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        if (data.length === 0) {
+            return res.status(404).json({ error: 'Email not found' });
+        }
+        
+        const user = data[0];
+
+        bcrypt.compare(password, user.password, (err, result) => {
+            if (err) {
+                return res.json(err);
+            }
+            if (!result) {
+                return res.status(401).json({ error: 'Incorrect password' });
+            }
+            return res.json({firstname: user.firstname});
+        }); 
+    });
+});
+
 
 app.listen(5500, () => console.log('Server started on port 5500'));

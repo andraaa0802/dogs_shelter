@@ -33,8 +33,8 @@ function Footer() {
             <div className="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
               <h2 className="footer-heading">Link-uri utile</h2>
               <ul className="list-unstyled">
-                <li><Link className="py-2 d-block" reloadDocument to="/home">Acasă</Link></li>
-                <li><Link className="py-2 d-block" reloadDocument to="/about">Despre</Link></li>
+                <li><Link className="py-2 d-block" reloadDocument to="/">Acasă</Link></li>
+                <li><Link className="py-2 d-block" reloadDocument to="/about">Despre noi</Link></li>
                 <li><Link className="py-2 d-block" reloadDocument to="/adopt">Adoptă</Link></li>
                 <li><Link className="py-2 d-block" reloadDocument to="/FAQ">FAQ</Link></li>
                 <li><Link className="py-2 d-block" reloadDocument to="/adoptions">Adopții</Link></li>
@@ -50,13 +50,6 @@ function Footer() {
                   <li><span className="icon fa fa-paper-plane" /><span className="text">contact@dogsrescuers.ro</span></li>
                 </ul>
               </div>
-            </div>
-          </div>
-          <div className="row mt-5">
-            <div className="col-md-12 text-center">
-              <p className="copyright">
-                Copyright &copy; {new Date().getFullYear()} All rights reserved | This template is made with <i className="fa fa-heart" aria-hidden="true" /> by <a href="https://colorlib.com" target="_blank" rel="noreferrer noopener">Colorlib.com</a>
-              </p>
             </div>
           </div>
         </div>

@@ -89,6 +89,7 @@ margin: 10px;}
     transition: 0.3s;
     cursor: pointer;
 }
+
 .reset-btn:hover{
     background-color: green;
     color: white;
@@ -148,7 +149,7 @@ margin: 10px;}
 .adopt-btn{
     text-align: center;
     width: 50%;
-    border-radius: 5px;
+    border-radius: 30px;
     border: none;
     padding: 0.5rem 1rem;
     background-color: #34ce57;
@@ -171,5 +172,109 @@ margin: 10px;}
     color:rgb(163, 163, 163);
 }
 
+/* Sign up section */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: #303030 0px 0px 10px;
+    width: 400px;
+    max-width: 90%; 
+    position: relative;
+    text-align: center; 
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-weight: 500;
+  }
+
+  .modal-content input{
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 2px solid #34ce57;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 20px; 
+    color: #000;
+  }
+  
+  .toggle-link {
+    color: #34ce57;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px; 
+  }
+
+  .toggle-link:hover {
+    color: green;
+  }
+
+  .connect-button {
+    width: 100%;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    background-color: #34ce57;
+    color: white;
+    font-weight: 500;
+    margin: 20px auto;
+    transition: 0.3s;
+    display: block;
+    cursor: pointer;
+  }
+  .connect-button:hover {
+    background-color: green;
+  }
+  
+  .password-input{
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .password-input input{
+    width: 100%;
+    padding-right: 40px;
+  }
+  .password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.password-toggle-icon:hover {
+    color: #34ce57;
+}
+
+.pass-info{
+    color:rgb(163, 163, 163);
+}
+
+.error{
+    color: red;
+}
 
   
