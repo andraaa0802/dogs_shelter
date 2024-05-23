@@ -1,0 +1,66 @@
+.adoption-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .adoption-modal-content {
+    background: white;
+    padding: 10px 50px;
+    border-radius: 30px;
+    box-shadow: #303030 0px 0px 10px;
+    width: 400px;
+    max-width: 90%; 
+    position: relative;
+    text-align: center; 
+  }
+  
+  .adoption-modal-content h2 {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-weight: 500;
+  }
+
+  .adoption-modal-content input{
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 2px solid #34ce57;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight:lighter;
+  }
+
+ .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 20px; 
+    color: #000;
+  }
+
+  .adoption-modal-content button {
+    width: 100%;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    background-color: #34ce57;
+    color: white;
+    font-weight: 500;
+    margin: 20px auto;
+    transition: 0.3s;
+    display: block;
+    cursor: pointer;
+  }
+  .adoption-modal-content button:hover {
+    background-color: green;
+  }

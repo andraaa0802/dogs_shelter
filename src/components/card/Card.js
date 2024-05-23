@@ -3,7 +3,6 @@ import './Card.css';
 import { Link } from 'react-router-dom';
 
 function Card({
-    key,
     imgSrc,
     dogName,
     dogAge,

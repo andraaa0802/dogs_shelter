@@ -4,18 +4,34 @@ import Footer from '../components/Footer';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Card from '../components/card/Card';
 import Selector from 'react-dropdown-select';
-
+import AddDogForm from '../components/addDog_form/AddDogForm';
 function Adopt() {
+  const [userRole, setUserRole] = useState('');
 
   const [dogs, setDogs] = useState([]);
   const [gender, setGender]= useState([]);
   const [breed, setBreed]= useState([]);
   const [age, setAge]= useState([]);
+  const [isAddDogModalOpen, setIsAddDogModalOpen] = useState(false);
   
   const genderSelectorRef = useRef(null);
   const breedSelectorRef = useRef(null);
   const ageSelectorRef = useRef(null);
   const searchRef = useRef(null);
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('isLoggedIn');
+    const email = localStorage.getItem('email');
+    const role = localStorage.getItem('userRole');
+    if (loggedIn === 'true' && role === 'Admin') {
+      setUserRole('Admin');
+    }
+    else {
+      setUserRole('User');
+    }
+    console.log(email, loggedIn, role);
+    window.dispatchEvent(new Event('storage'));
+  }, [userRole]);
 
   useEffect(() => {
     fetchDogs(); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,6 +58,7 @@ function Adopt() {
       .catch(error => {
         console.error('Error fetching dog data: ', error);
       });
+    
   };
 
   const handleGenderChange = (selected) => {
@@ -81,11 +98,25 @@ function Adopt() {
     { label: 'Crescător', value: 'crescator' },
     { label: 'Descrescător', value: 'descrescator' },
   ];
+
+  const openAddDogModal = () => {
+    setIsAddDogModalOpen(true);
+  }
+
+  const closeAddDogModal = () => {
+    setIsAddDogModalOpen(false);
+  }
+
+  const handleAddDog = () => {
+    fetchDogs();
+  }
   
   return (
     <div>
-      <Header />
+      <Header/>
       <Breadcrumbs previousPage="Acasă" path="Adoptă" />
+      
+      {userRole==='Admin' && <div className='admin-btn-cont'><button className='add-btn' onClick={openAddDogModal}>Adaugă câine</button></div>}
       <div className='search-container'>
         <p className='filter-text'>Căutați ceea ce vă doriți (nume, vârstă, rasă, caracteristică)</p>
       <input type='search' placeholder='Căutați...' className='search-bar' ref={searchRef} onChange={fetchDogs}/>
@@ -104,6 +135,7 @@ function Adopt() {
         <Selector   ref={ageSelectorRef} options={ageOptions} placeholder='Selectați...' searchable={false} closeOnClickInput={true} onChange={handleAgeChange} className='dropdown-selector'/>
         </div>
         <button onClick={resetFilters} className='reset-btn'>Resetați filtrele</button>
+      
       </div>
       <div className='cards-container'>
       {dogs && dogs.map(dog => (
@@ -119,11 +151,13 @@ function Adopt() {
           />
           </div>
         ))}
+        
       </div>
 
       <Footer />
-      
+      {isAddDogModalOpen && <AddDogForm onClose={closeAddDogModal} onDogAdded={handleAddDog} />}
     </div>
+    
   );
 }
 

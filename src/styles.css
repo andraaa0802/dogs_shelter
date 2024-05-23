@@ -110,9 +110,34 @@ margin: 10px;}
     margin: 10px 0;
 }
 
-
 .search-bar:focus{
     outline: none;
+}
+
+.admin-btn-cont{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+.add-btn{
+    width: 200px;
+    height: 38px;
+    border-radius: 30px;
+    border: none;
+    background-color: #34ce57;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s;
+    cursor: pointer;
+    padding: 0 10px;
+    margin: 10px 10px;
+    
+}
+
+.add-btn:hover{
+    background-color: green;
+    color: white;
 }
 
 /* Dog details section */

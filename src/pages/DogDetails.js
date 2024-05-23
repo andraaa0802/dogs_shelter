@@ -3,11 +3,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useParams } from 'react-router-dom';
+import AdoptionForm from '../components/adoption_form/AdoptionForm';
 
 function DogDetails() {
     const { id } = useParams();
     const [dogDetails, setDogDetails] = useState(null);
     const [isLogged, setIsLogged] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:5500/dogs/${id}`)
@@ -46,6 +48,14 @@ function DogDetails() {
         return <div>Loading...</div>;
     }
 
+    const handleAdoptClick = () => {
+        setShowForm(true);
+    }
+
+    const handleCloseForm = () => {
+        setShowForm(false);
+    }
+
     return (
         <div>
             <Header />
@@ -65,11 +75,12 @@ function DogDetails() {
                         <p>Vârstă: <span className='dog-details'>{dogDetails.age} ani</span></p>
                         <p>Rasă: <span className='dog-details'>{dogDetails.breed}</span></p>
                         <p>Descriere: <span className='dog-details'>{dogDetails.description}</span></p>
-                        <button disabled={!isLogged} className='adopt-btn'>Adoptă</button>
+                        <button disabled={!isLogged} onClick={handleAdoptClick} className='adopt-btn'>Adoptă</button>
                     </div>
                 </div>
             </div>
             <Footer />
+            {showForm && <AdoptionForm dogId={id} onClose={handleCloseForm} />}
         </div>
     );
 }

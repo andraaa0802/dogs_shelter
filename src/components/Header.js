@@ -5,31 +5,40 @@ import Authenticator from './Authenticator';
 function Header() {
   const [isAuthenticatorOpen, setIsAuthenticatorOpen] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('isLoggedIn');
     const email = localStorage.getItem('email');
-    if (loggedIn && email) {
+    const firstName = localStorage.getItem('firstName');
+    if (loggedIn === 'true' && email && firstName) {
       setIsLogged(true);
-    }
+      setUserName(firstName);
+  }
   }, []);
 
   const openAuthenticator = () => setIsAuthenticatorOpen(true);
   const closeAuthenticator = () => setIsAuthenticatorOpen(false);
   
-  const handleLogin = (email) => {
+  const handleLogin = (email, userRole, firstName) => {
     setIsLogged(true);
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('email', email);
+    localStorage.setItem('userRole', userRole);
+    localStorage.setItem('firstName', firstName);
     window.dispatchEvent(new Event('storage'));
+    window.location.reload();
   }
 
   const handleLogout = () => {
     setIsLogged(false);
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('email');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('firstName');
     alert("V-ați delogat cu succes!")
     window.dispatchEvent(new Event('storage'));
+    window.location.reload();
   }
 
   return (
@@ -74,7 +83,7 @@ function Header() {
                 <li className="nav-item"><Link className="nav-link" reloadDocument to="/contact">Contact</Link></li>
                 <li className="nav-item">
                   {isLogged ? (
-                  <Link className="nav-link" onClick={handleLogout} >Log out</Link>
+                  <Link className="nav-link" onClick={handleLogout} > Log out - {userName}</Link>                     
                   ) : (
                   <Link className="nav-link" onClick={openAuthenticator} >Log in</Link>
                   )}

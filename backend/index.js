@@ -4,6 +4,13 @@ import mysql from 'mysql2';
 import bcrypt from 'bcrypt';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -97,6 +104,41 @@ app.get('/dogs', (req, res) => {
     });
 });
 
+const imagesDir = path.join(__dirname,'..', 'public', 'images');
+console.log(imagesDir);
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, imagesDir);
+    },
+    filename: function (req, file, cb) {
+        const filename= `${Date.now()}_${file.originalname}`;
+        cb(null, filename);
+    }
+});
+
+const upload = multer({ storage });
+
+app.post('/addDog', upload.single('file'), (req, res) => {
+    if(!req.file) {
+        return res.status(400).json({ error: 'Image file is required' });
+    }
+
+    const {name, breed, age, gender, description} = req.body;
+    const image_url = `images/${req.file.filename}`;
+
+    const sql = 'INSERT INTO dogs (`name`, `breed`, `age`, `gender`, `description`, `image_url`) VALUES (?, ?, ?, ?, ?, ?)';
+    const insertValues = [name, breed, age, gender, description, image_url];
+
+    pool.query(sql, insertValues, (err, data) => {
+        if (err) {
+            console.error('Error adding dog to database:', err);
+            return res.status(500).json({ error: 'Internal Server Error', details: err.message });
+        }
+        return res.json(data);
+    });
+});
+
 app.post('/signup', (req, res) => {
     const { email, password, confirmPassword, firstname, lastname, phone } = req.body;
 
@@ -146,7 +188,7 @@ app.post('/login', (req, res) => {
     const sqlCheckEmail = 'SELECT * FROM users WHERE email = ?';
     const {email, password} = req.body;
     
-    pool.query(sqlCheckEmail, email, (err, data) => {
+    pool.query(sqlCheckEmail, [email], (err, data) => {
         if (err) {
             return res.json(err);
         }
@@ -163,13 +205,14 @@ app.post('/login', (req, res) => {
             if (!result) {
                 return res.status(401).json({ error: 'Incorrect password' });
             }
-
-            req.session.user = {email: user.email, firstname: user.firstname};
-
-            res.json({isLoggedIn: true, firstname: user.firstname});
+            
+            
+            req.session.user = { email: user.email, firstname: user.firstname, userRole: user.role};
+            res.json({ isLoggedIn: true, email:user.email, firstname: user.firstname, userRole: user.role});
         }); 
     });
 });
+
 
 app.post('/logout', (req, res) => {
     req.session.destroy(err =>{
