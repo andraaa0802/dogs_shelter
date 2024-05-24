@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ContactUs from '../components/contact_form/contact';
 import Breadcrumbs from '../components/Breadcrumbs';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'; // Importing react-icons
+import { FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa'; 
 
 function Contact() {
   return (

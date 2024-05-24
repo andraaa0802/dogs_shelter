@@ -35,7 +35,7 @@ export const ContactUs = () => {
       .then(
         () => {
           e.target.reset();
-          setMessage('Mesajul a fost trimis cu succes!');
+          alert('Mesajul a fost trimis cu succes!');
           setTimeout(() => {
             setMessage(null);
           }, 5000);
