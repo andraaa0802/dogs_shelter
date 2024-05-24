@@ -61,7 +61,7 @@ const Authenticator = ({ closeModal, handleLogin }) => {
             .then((response) => {
                 console.log(response.data);
                 if (isLogin) {
-                    handleLogin(response.data.email, response.data.userRole, response.data.firstname, response.data.phone);
+                    handleLogin(response.data.email, response.data.userRole, response.data.firstname, response.data.phone, response.data.userId);
                     closeModal();
                     setTimeout(() => {
                     alert("Bun venit, " + response.data.firstname + "!");

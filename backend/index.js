@@ -139,6 +139,32 @@ app.post('/addDog', upload.single('file'), (req, res) => {
     });
 });
 
+app.post('/adopt', (req, res) => {
+    const { city, experience, anotherDog, yard, message, email, firstname, phone, userId, dogId } = req.body;
+
+    const insertSql = 'INSERT INTO adoption_forms (`location`, `experience`, `dogs_nr`, `yard`, `message`, `email`, `name`, `phone_number`, `dog_id`, `user_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const insertValues = [city, experience, anotherDog, yard, message, email, firstname, phone, dogId, userId];
+
+    pool.query(insertSql, insertValues, (err, data) => {
+        if (err) {
+            console.error('Error adding adoption request to database:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        console.log('Adoption data inserted successfully');
+
+        const updateSql= 'UPDATE dogs SET status="pending" WHERE dog_id=?';
+        pool.query(updateSql, [dogId], (err, data) => {
+            if(err) {
+                console.error('Error updating dog status:', err);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+        });
+            console.log('Dog status updated successfully to Pending');
+
+        res.status(200).json({ message: 'Adoption data inserted successfully' });
+       });
+});
+
 app.post('/signup', (req, res) => {
     const { email, password, confirmPassword, firstname, lastname, phone } = req.body;
 
@@ -207,8 +233,8 @@ app.post('/login', (req, res) => {
             }
             
             
-            req.session.user = { email: user.email, firstname: user.firstname, userRole: user.role, phone: user.phone};
-            res.json({ isLoggedIn: true, email:user.email, firstname: user.firstname, userRole: user.role, phone: user.phone});
+            req.session.user = { userId: user.user_id, email: user.email, firstname: user.firstname, userRole: user.role, phone: user.phone};
+            res.json({ isLoggedIn: true, email:user.email, firstname: user.firstname, userRole: user.role, phone: user.phone, userId: user.user_id});
         }); 
     });
 });

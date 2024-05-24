@@ -12,7 +12,8 @@ function Header() {
     const email = localStorage.getItem('email');
     const firstName = localStorage.getItem('firstName');
     const phone = localStorage.getItem('phone');
-    if (loggedIn === 'true' && email && firstName && phone) {
+    const userId = localStorage.getItem('user_id');
+    if (loggedIn === 'true' && email && firstName && phone && userId) {
       setIsLogged(true);
       setUserName(firstName);
   }
@@ -21,13 +22,14 @@ function Header() {
   const openAuthenticator = () => setIsAuthenticatorOpen(true);
   const closeAuthenticator = () => setIsAuthenticatorOpen(false);
   
-  const handleLogin = (email, userRole, firstName, phone) => {
+  const handleLogin = (email, userRole, firstName, phone, userId) => {
     setIsLogged(true);
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('email', email);
     localStorage.setItem('userRole', userRole);
     localStorage.setItem('firstName', firstName);
     localStorage.setItem('phone', phone);
+    localStorage.setItem('user_id', userId);
 
     window.dispatchEvent(new Event('storage'));
     window.location.reload();
@@ -40,6 +42,7 @@ function Header() {
     localStorage.removeItem('userRole');
     localStorage.removeItem('firstName');
     localStorage.removeItem('phone');
+    localStorage.removeItem('user_id');
     alert("V-ați delogat cu succes!")
     window.dispatchEvent(new Event('storage'));
     window.location.reload();
