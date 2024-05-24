@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AdoptionForm.css';
+import emailjs from '@emailjs/browser';
 
-function AdoptionForm({dogId, onClose}) {
+function AdoptionForm({ dogId, onClose}) {
     const [formData, setFormData] = useState({
         city: '',
         experience: '',
@@ -19,7 +20,7 @@ function AdoptionForm({dogId, onClose}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5500/adopt', {
+        /*fetch('http://localhost:5500/adopt', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,14 +37,52 @@ function AdoptionForm({dogId, onClose}) {
         })
         .catch(error => {
             console.error('Error submitting adoption form: ', error);
-        });
+        });*/
+
+        sendEmail(e);
+    };
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        
+        const email=localStorage.getItem('email');
+        const firstname=localStorage.getItem('firstName');
+        const phone=localStorage.getItem('phone');
+        const {city, experience, anotherDog, yard, message} = formData;
+
+        const templateParams = {
+            city,
+            experience,
+            anotherDog,
+            yard,
+            message,
+            email,
+            firstname,
+            phone,
+            dogId,
+        };
+
+        emailjs
+        .send('service_o8rw5fm', 'template_4mlwvma', templateParams, '8bbRQBEDHXObDAA3M')    
+        .then(
+            () => {
+                e.target.reset();
+                alert('Mesajul a fost trimis cu succes!');
+                onClose();
+            }, 
+            (error) => {
+                alert('A apărut o eroare la trimiterea mesajului. Vă rugăm să încercați din nou!');
+            }
+        );
+        console.log(email, firstname, phone, city, experience, anotherDog, yard, message, dogId);
+        window.dispatchEvent(new Event('storage'));
     };
 
     return(
         <div className='adoption-modal'>
             <div className='adoption-modal-content'>
             <span className="close" onClick={onClose}>&times;</span>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={ handleSubmit}>
                 <h2>Formular de adopție</h2>
                 <label>
                     Unde doriți să locuiți cu câinele?
@@ -63,7 +102,7 @@ function AdoptionForm({dogId, onClose}) {
                 </label>
                 <label>
                     Doriți să ne lăsați un mesaj?
-                    <textarea name='message' placeholder='ex.: De ce vă doriți acest câine? :)' />
+                    <textarea name='message' placeholder='ex.: De ce vă doriți acest câine? :)' value={formData.message} onChange={handleChange} />
                 </label>  
                 <p> După trimiterea formularului, unul din colegii noștri vă va contacta pentru a stabili mai multe detalii. Vă mulțumim!</p>  
                 <button type='submit'>Trimite</button>

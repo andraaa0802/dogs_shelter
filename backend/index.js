@@ -207,8 +207,8 @@ app.post('/login', (req, res) => {
             }
             
             
-            req.session.user = { email: user.email, firstname: user.firstname, userRole: user.role};
-            res.json({ isLoggedIn: true, email:user.email, firstname: user.firstname, userRole: user.role});
+            req.session.user = { email: user.email, firstname: user.firstname, userRole: user.role, phone: user.phone};
+            res.json({ isLoggedIn: true, email:user.email, firstname: user.firstname, userRole: user.role, phone: user.phone});
         }); 
     });
 });
