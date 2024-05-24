@@ -38,6 +38,17 @@
     display: block;
     cursor: pointer;
 }
+
+.card-btn.accept{
+    background-color: #34ce57;
+}
+.card-btn.reject{
+    background-color: #ff4d4d;
+}
+.card-btn.reject:hover{
+    background-color: rgb(124, 23, 23);
+}
+
 .card-btn:hover{
     background-color: green;
     color: white;

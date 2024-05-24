@@ -8,7 +8,11 @@ function Card({
     dogAge,
     dogGender,
     dogBreed,
-    buttonLink
+    buttonLink,
+    showDetailsButton=true,
+    showAcceptButton=false,
+    showRejectButton=false,
+    handleApproval
 }) {
     return (
         <div className='card-container'>
@@ -19,7 +23,9 @@ function Card({
                 <li>Vârstă: <span className='dog-detail'>{dogAge} ani</span></li>
                 <li>Rasă: <span className='dog-detail'>{dogBreed}</span></li>
             </ul>
-            <Link to={buttonLink}><button className='card-btn'>Află mai multe</button></Link>
+            {showDetailsButton && <Link to={buttonLink}><button className='card-btn'>Află mai multe</button></Link>}
+            {showAcceptButton && <button className='card-btn accept' onClick={() => handleApproval('accept')}>Acceptă</button>}
+            {showRejectButton && <button className='card-btn reject' onClick={() => handleApproval('reject')}>Respinge</button>}
         </div>
     );
 }

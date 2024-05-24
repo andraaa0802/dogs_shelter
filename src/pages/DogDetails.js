@@ -54,6 +54,7 @@ function DogDetails() {
 
     const handleCloseForm = () => {
         setShowForm(false);
+        window.history.back();
     }
 
     return (

@@ -68,7 +68,7 @@ app.get('/dogs/:id', (req, res) => {
 });
 
 app.get('/dogs', (req, res) => {
-    let query = 'SELECT * FROM dogs WHERE status="available" ';
+    const query = 'SELECT * FROM dogs WHERE status="available" ';
     const gender = req.query.gender;
     const breed = req.query.breed;
     const age = req.query.age;
@@ -102,6 +102,68 @@ app.get('/dogs', (req, res) => {
         }
         return res.json(data);
     });
+});
+
+app.get('/acceptedDogs', (req, res) => {
+    
+    pool.query('SELECT * FROM dogs WHERE status="Adopted"', (err, data) => {
+        if (err) {
+            console.error('Error querying database:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        return res.json(data);
+    });
+});
+
+app.get('/pendingAdoptions', (req, res) => {
+    pool.query('SELECT a.*, d.* FROM adoption_forms a JOIN dogs d ON a.dog_id = d.dog_id WHERE a.status = "Pending"', (err, data) => {
+        if (err) {
+            console.error('Error querying database:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        return res.json(data);
+    });
+});
+
+app.post('/approveAdoption', (req, res) => {
+    const { adoptionId, dogId, action } = req.body;
+    console.log(`Adoption ID: ${adoptionId}, Dog ID: ${dogId}, Action: ${action}`);
+
+    if (!adoptionId || !dogId) {
+        return res.status(400).json({ error: 'Invalid adoptionId or dogId' });
+    }
+
+    if (action === 'accept') {
+        pool.query('UPDATE adoption_forms SET status="Approved" WHERE form_id=?', [adoptionId], (err, data) => {
+        if (err) {
+            console.error('Error updating adoption status:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+            pool.query('UPDATE dogs SET status="Adopted" WHERE dog_id=?', [dogId], (err, data) => {
+                if(err){
+                    console.error('Error updating dog status:', err);
+                    return res.status(500).json({ error: 'Internal Server Error' });
+                }
+                return res.json({succes: true, message: 'Adoption approved'});
+            });
+        });
+    } else if (action === 'reject') {
+        pool.query('UPDATE adoption_forms SET status="Rejected" WHERE form_id=?', [adoptionId], (err, data) => {
+            if (err) {
+                console.error('Error updating adoption status:', err);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+            pool.query('UPDATE dogs SET status="Available" WHERE dog_id=?', [dogId], (err, data) => {
+                if(err){
+                    console.error('Error updating dog status:', err);
+                    return res.status(500).json({ error: 'Internal Server Error' });
+                }
+            return res.json({succes: true, message: 'Adoption rejected'});
+            });
+        });
+    } else {
+        return res.status(400).json({ error: 'Invalid action' });
+    }
 });
 
 const imagesDir = path.join(__dirname,'..', 'public', 'images');
